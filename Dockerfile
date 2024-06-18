@@ -2,19 +2,23 @@
 FROM devopsedu/webapp
 
 # Maintainer information
-MAINTAINER shyam <psgreddy95@gmail.com>
+MAINTAINER Shyam <psgreddy95@gmail.com>
 
 # Update the repository
-RUN apt-get update -y
+RUN yum update -y
 
-# Install Apache
-RUN apt-get install -y apache2
+# Install EPEL repository
+RUN yum install -y epel-release
 
-# Install PHP 8.0 and necessary modules
-RUN apt-get install -y software-properties-common \
-    && add-apt-repository ppa:ondrej/php \
-    && apt-get update -y \
-    && apt-get install -y php8.0 libapache2-mod-php8.0 php8.0-cli php8.0-common
+# Add Remi repository for the latest PHP
+RUN yum install -y https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+# Enable Remi's PHP 8.0 repository
+RUN yum module reset php -y
+RUN yum module enable php:remi-8.0 -y
+
+# Install Apache and PHP 8.0
+RUN yum install -y httpd php php-cli php-common php-fpm php-json php-mbstring php-xml php-mysqlnd
 
 # Remove default Apache files
 RUN rm -rf /var/www/html/*
@@ -22,9 +26,9 @@ RUN rm -rf /var/www/html/*
 # Copy application files
 COPY website /var/www/html/
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080
+EXPOSE 8080
 
 # Start Apache service
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 
