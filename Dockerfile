@@ -1,5 +1,5 @@
 # Use the base image
-FROM devopsedu/webapp
+FROM centos:latest
 
 # Maintainer information
 MAINTAINER Shyam <psgreddy95@gmail.com>
