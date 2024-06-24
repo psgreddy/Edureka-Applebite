@@ -22,9 +22,9 @@ RUN apt-get install -y apache2
 
 
 
-# Install PHP 8.2 and necessary modules
+# Install PHP Modules
 
-RUN apt-get install -y php8.2 libapache2-mod-php8.2 php8.2-cli php8.2-common
+RUN apt-get install -y php7.0 libapache2-mod-php7.0 php7.0-cli php7.0-common
 
 
 
@@ -40,14 +40,17 @@ COPY website /var/www/html/
 
 
 
-# Expose port 80
+# Expose port 8080
 
-EXPOSE 80
+EXPOSE 8080
 
 
 
 # Start Apache service
 
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/apache2ct1", "-D", "FOREGROUND"]
+
+
+
 
 
