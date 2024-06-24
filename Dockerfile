@@ -48,7 +48,7 @@ EXPOSE 8080
 
 # Start Apache service
 
-CMD ["/usr/bin/apachectl", "-D", "FOREGROUND"]
+CMD apachectl -D Foreground
 
 
 
