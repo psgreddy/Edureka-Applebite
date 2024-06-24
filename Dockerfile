@@ -22,15 +22,9 @@ RUN apt-get install -y apache2
 
 
 
-# Install PHP 8.0 and necessary modules
+# Install PHP 8.2 and necessary modules
 
-RUN apt-get install -y software-properties-common \
-
-    && add-apt-repository ppa:ondrej/php \
-
-    && apt-get update -y \
-
-    && apt-get install -y php8.0 libapache2-mod-php8.0 php8.0-cli php8.0-common
+RUN apt-get install -y php8.2 libapache2-mod-php8.2 php8.2-cli php8.2-common
 
 
 
@@ -55,3 +49,5 @@ EXPOSE 80
 # Start Apache service
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+
+
